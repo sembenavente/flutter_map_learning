@@ -123,7 +123,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   new Polyline(
                       points: points,
                       strokeWidth: 2.0,
-                      color: Colors.blueAccent)
+                      gradientColors: [
+                        Colors.purple,
+                        Colors.teal,
+                        Colors.yellowAccent,
+                        Colors.cyan
+                      ])
                 ])
               ],
             ))
