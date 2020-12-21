@@ -77,8 +77,17 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Widget> list = new List<Widget>();
     for (var i = 0; i < coords.length; i++) {
       list.add(new RaisedButton(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(40.0),
+                topLeft: Radius.circular(40.0)),
+            side: BorderSide(color: Colors.green[400], width: 3.0)),
         onPressed: () => _showCoord(i),
-        child: new Text(coords.keys.elementAt(i)),
+        child: new Text(
+          coords.keys.elementAt(i),
+          style:
+              TextStyle(color: Colors.green[400], fontWeight: FontWeight.w800),
+        ),
       ));
     }
     return list;
@@ -88,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green[400],
         title: Text(widget.title),
       ),
       body: Center(
@@ -95,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: _makeButtons(),
             ),
             new Flexible(
