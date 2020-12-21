@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   MapController mapController;
   Map<String, LatLng> coords;
   List<Marker> markers;
+  List<LatLng> points;
 
   void _incrementCounter() {
     setState(() {
@@ -47,6 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     mapController = new MapController();
     coords = new Map<String, LatLng>();
+    points = new List<LatLng>();
+
     coords.putIfAbsent("FIA", () => new LatLng(-11.99078, -76.84004));
     coords.putIfAbsent("CRAI", () => new LatLng(-11.99230, -76.84117));
     coords.putIfAbsent("Bazar", () => new LatLng(-11.99223, -76.84212));
@@ -62,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.location_pin,
                 color: Colors.red,
               )));
+      points.add(coords.values.elementAt(i));
     }
   }
 
@@ -103,16 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     urlTemplate:
                         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                     subdomains: ['a', 'b', 'c']),
-                new MarkerLayerOptions(markers: markers)
+                new MarkerLayerOptions(markers: markers),
+                new PolylineLayerOptions(polylines: [
+                  new Polyline(
+                      points: points,
+                      strokeWidth: 2.0,
+                      color: Colors.blueAccent)
+                ])
               ],
             ))
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
